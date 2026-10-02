@@ -1,0 +1,15 @@
+meta {
+  name: Cancelar Pedido
+  type: http
+  seq: 4
+}
+post {
+  url: http://localhost:8080/pedidos/ID_DO_PEDIDO/cancelar
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "motivo": "Demora na entrega"
+  }
+}

@@ -1,0 +1,15 @@
+meta {
+  name: Editar Categoria
+  type: http
+  seq: 3
+}
+put {
+  url: http://localhost:8080/categorias/cat-uuid-1
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "nome": "Massas Atualizadas"
+  }
+}

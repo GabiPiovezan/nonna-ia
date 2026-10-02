@@ -1,0 +1,25 @@
+meta {
+  name: Criar Pedido
+  type: http
+  seq: 1
+}
+post {
+  url: http://localhost:8080/pedidos
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "idCliente": "cliente-uuid-1",
+    "tipoEntrega": "Entrega",
+    "endereco": "Rua X, 123",
+    "formaPagamento": "CartÃ£o de CrÃ©dito",
+    "telefone": "11999999999",
+    "itens": [
+      {
+        "idProduto": "prod-uuid-1",
+        "preco": 45.90
+      }
+    ]
+  }
+}

@@ -1,0 +1,328 @@
+openapi: 3.0.3
+info:
+  title: Cantina da Nonna API
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /categorias:
+    get:
+      summary: Listar categorias
+      responses:
+        '200':
+          description: Sucesso
+    post:
+      summary: Criar categoria
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /categorias/{id}:
+    put:
+      summary: Editar categoria
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+    delete:
+      summary: Remover categoria
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+  /produtos:
+    get:
+      summary: Listar produtos
+      responses:
+        '200':
+          description: Sucesso
+    post:
+      summary: Criar produto
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+                preco:
+                  type: number
+                idCategoria:
+                  type: string
+                imagem:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /produtos/{id}:
+    get:
+      summary: Buscar produto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+    put:
+      summary: Editar produto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                descricao:
+                  type: string
+                preco:
+                  type: number
+                idCategoria:
+                  type: string
+                imagem:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+    delete:
+      summary: Remover produto
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+  /pedidos:
+    get:
+      summary: Listar pedidos (Nao concluidos)
+      responses:
+        '200':
+          description: Sucesso
+    post:
+      summary: Criar pedido
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idCliente:
+                  type: string
+                tipoEntrega:
+                  type: string
+                endereco:
+                  type: string
+                formaPagamento:
+                  type: string
+                telefone:
+                  type: string
+                itens:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      idProduto:
+                        type: string
+                      preco:
+                        type: number
+      responses:
+        '200':
+          description: Sucesso
+  /pedidos/{id}:
+    get:
+      summary: Buscar detalhes do pedido
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+    put:
+      summary: Atualizar status do pedido
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                status:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /pedidos/{id}/cancelar:
+    post:
+      summary: Cancelar pedido
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                motivo:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /clientes:
+    get:
+      summary: Listar clientes
+      responses:
+        '200':
+          description: Sucesso
+  /clientes/{id}:
+    get:
+      summary: Buscar cliente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+    put:
+      summary: Atualizar cliente
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nome:
+                  type: string
+                sobrenome:
+                  type: string
+                email:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /reserva:
+    post:
+      summary: Criar reserva
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                idCliente:
+                  type: string
+                horario:
+                  type: string
+                  format: date-time
+                quantidadePessoas:
+                  type: integer
+                tipoEvento:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /reserva/{id}/cancelar:
+    post:
+      summary: Cancelar reserva
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                motivo:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso
+  /configuracoes:
+    post:
+      summary: Salvar configuracoes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                horario_funcionamento:
+                  type: string
+      responses:
+        '200':
+          description: Sucesso

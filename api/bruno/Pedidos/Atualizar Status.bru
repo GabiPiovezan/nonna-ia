@@ -1,0 +1,15 @@
+meta {
+  name: Atualizar Status
+  type: http
+  seq: 3
+}
+put {
+  url: http://localhost:8080/pedidos/ID_DO_PEDIDO
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "status": "SAIU_PARA_ENTREGA"
+  }
+}

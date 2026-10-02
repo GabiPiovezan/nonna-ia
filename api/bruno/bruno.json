@@ -1,0 +1,9 @@
+﻿{
+  "version": "1",
+  "name": "Nonna AI API",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

@@ -1,0 +1,19 @@
+meta {
+  name: Criar Produto
+  type: http
+  seq: 3
+}
+post {
+  url: http://localhost:8080/produtos
+  body: json
+  auth: none
+}
+body:json {
+  {
+    "nome": "Pizza Margherita",
+    "descricao": "Molho de tomate, mussarela e manjericÃ£o.",
+    "preco": 60.00,
+    "idCategoria": "cat-uuid-1",
+    "imagem": "url_imagem_pizza"
+  }
+}
