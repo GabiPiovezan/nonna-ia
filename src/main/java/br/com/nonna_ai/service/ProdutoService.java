@@ -1,4 +1,5 @@
 package br.com.nonna_ai.service;
+
 import br.com.nonna_ai.dto.ProdutoRequestDTO;
 import br.com.nonna_ai.dto.ProdutoResponseDTO;
 import br.com.nonna_ai.entity.Produto;
@@ -12,7 +13,10 @@ import java.util.stream.Collectors;
 @Service
 public class ProdutoService {
     private final ProdutoRepository repository;
-    public ProdutoService(ProdutoRepository repository) { this.repository = repository; }
+
+    public ProdutoService(ProdutoRepository repository) {
+        this.repository = repository;
+    }
 
     public ProdutoResponseDTO create(ProdutoRequestDTO dto) {
         Produto p = new Produto();
@@ -32,13 +36,15 @@ public class ProdutoService {
 
     public ProdutoResponseDTO findById(String id) {
         Produto p = repository.findById(id);
-        if (p == null) throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
+        if (p == null)
+            throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
         return toDTO(p);
     }
 
     public ProdutoResponseDTO update(String id, ProdutoRequestDTO dto) {
         Produto p = repository.findById(id);
-        if (p == null) throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
+        if (p == null)
+            throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
         p.setNome(dto.nome());
         p.setDescricao(dto.descricao());
         p.setPreco(dto.preco());
@@ -50,11 +56,13 @@ public class ProdutoService {
 
     public void delete(String id) {
         Produto p = repository.findById(id);
-        if (p == null) throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
+        if (p == null)
+            throw new BusinessException("PRODUTO NÃƒO ENCONTRADO");
         repository.delete(id);
     }
-    
+
     private ProdutoResponseDTO toDTO(Produto p) {
-        return new ProdutoResponseDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getIdCategoria(), p.getImagem());
+        return new ProdutoResponseDTO(p.getId(), p.getNome(), p.getDescricao(), p.getPreco(), p.getIdCategoria(),
+                p.getImagem());
     }
 }

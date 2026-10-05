@@ -1,4 +1,5 @@
 package br.com.nonna_ai.repository;
+
 import br.com.nonna_ai.entity.Categoria;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;

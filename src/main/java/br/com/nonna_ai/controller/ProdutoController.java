@@ -1,4 +1,5 @@
 package br.com.nonna_ai.controller;
+
 import br.com.nonna_ai.dto.ProdutoRequestDTO;
 import br.com.nonna_ai.dto.ProdutoResponseDTO;
 import br.com.nonna_ai.service.ProdutoService;
@@ -10,7 +11,10 @@ import java.util.List;
 @RequestMapping("/produtos")
 public class ProdutoController {
     private final ProdutoService service;
-    public ProdutoController(ProdutoService service) { this.service = service; }
+
+    public ProdutoController(ProdutoService service) {
+        this.service = service;
+    }
 
     @PostMapping
     public ProdutoResponseDTO create(@Valid @RequestBody ProdutoRequestDTO dto) {
@@ -18,8 +22,10 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public List<ProdutoResponseDTO> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "30") int size) {
-        if(size > 100) size = 100;
+    public List<ProdutoResponseDTO> findAll(@RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "30") int size) {
+        if (size > 100)
+            size = 100;
         return service.findAll(page, size);
     }
 
