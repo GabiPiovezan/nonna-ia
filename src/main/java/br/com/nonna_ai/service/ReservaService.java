@@ -4,14 +4,19 @@ import br.com.nonna_ai.entity.Reserva;
 import br.com.nonna_ai.exception.BusinessException;
 import br.com.nonna_ai.repository.ReservaRepository;
 import org.springframework.stereotype.Service;
-import java.util.Map;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.UUID;
 
 @Service
 public class ReservaService {
+    
     private final ReservaRepository repository;
-    public ReservaService(ReservaRepository repository) { this.repository = repository; }
-
+    
+    public ReservaService(ReservaRepository repository) {
+         this.repository = repository; 
+    }
+@Transactional 
     public Reserva create(ReservaRequestDTO dto) {
         Reserva r = new Reserva();
         r.setId(UUID.randomUUID().toString());
@@ -22,10 +27,12 @@ public class ReservaService {
         repository.save(r);
         return r;
     }
-
+@Transactional 
     public Reserva cancelar(String id, String motivo) {
         Reserva r = repository.findById(id);
-        if (r == null) throw new BusinessException("RESERVA NÃƒO ENCONTRADA");
+        if (r == null){
+            throw new BusinessException("Reserva não encontrada!");
+        } 
         r.setMotivoCancelamento(motivo);
         repository.update(r);
         return r;
